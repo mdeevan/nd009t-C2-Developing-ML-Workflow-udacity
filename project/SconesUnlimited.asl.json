@@ -1,8 +1,8 @@
 {
   "Comment": "A description of my state machine",
-  "StartAt": "Lambda Invoke",
+  "StartAt": "Serialize Image Data",
   "States": {
-    "Lambda Invoke": {
+    "Serialize Image Data": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
@@ -23,9 +23,9 @@
           "BackoffRate": 2
         }
       ],
-      "Next": "Lambda Invoke (1)"
+      "Next": "Classifier"
     },
-    "Lambda Invoke (1)": {
+    "Classifier": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
@@ -46,9 +46,9 @@
           "BackoffRate": 2
         }
       ],
-      "Next": "Lambda Invoke (2)"
+      "Next": "Threshold Confidence"
     },
-    "Lambda Invoke (2)": {
+    "Threshold Confidence": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
